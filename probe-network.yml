@@ -1,0 +1,16 @@
+captures:
+  - ip: 192.168.1.6
+    protocols:
+      - HTTP
+      - TCP
+#      - UDP
+#      - IP
+#      - RAW
+    output:
+#      print: true
+#      kafka:
+#        bootstrapServers: 127.0.0.1:9092
+#        topic: test
+#        timeoutMs: 5000
+      file:
+        dir: logs
