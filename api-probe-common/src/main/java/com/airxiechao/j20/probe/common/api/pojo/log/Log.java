@@ -4,13 +4,12 @@ import com.alibaba.fastjson2.JSONObject;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.apache.commons.lang3.StringUtils;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
- * 原始日志
+ * 输出日志
  */
 @Data
 @NoArgsConstructor
@@ -26,26 +25,6 @@ public class Log {
      * 时间戳
      */
     private Long timestamp;
-
-    /**
-     * 特征描述
-     */
-    private String feature;
-
-    /**
-     * 所属窗口的计数输出
-     */
-    private Double windowOut;
-
-    /**
-     * 所属窗口的开始时间戳
-     */
-    private Long windowStart;
-
-    /**
-     * 所属窗口的结束时间戳
-     */
-    private Long windowEnd;
 
     /**
      * 构造函数
@@ -64,19 +43,8 @@ public class Log {
     @Override
     public String toString() {
         SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
-        return String.format("(timestamp=%s, log=%s, feature=%s)",
-                sf.format(new Date(timestamp)), data.toJSONString(), feature);
+        return String.format("(timestamp=%s, log=%s)",
+                sf.format(new Date(timestamp)), data.toJSONString());
     }
 
-    /**
-     * 添加特征描述
-     * @param value 特征描述
-     */
-    public synchronized void addFeature(String value){
-        if(StringUtils.isBlank(feature)) {
-            feature = value;
-        }else{
-            feature = String.format("%s,%s", feature, value);
-        }
-    }
 }
